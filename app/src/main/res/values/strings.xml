@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">AssignmentApp</string>
+    <string name="no_stock">স্টকে নেই</string>
+    <string name="_20_00">৳ 20.00</string>
 </resources>
