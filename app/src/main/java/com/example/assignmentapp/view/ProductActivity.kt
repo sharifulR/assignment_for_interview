@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -34,8 +35,55 @@ class ProductActivity : AppCompatActivity(), ProductAdapter.ListItemClickListene
 
         viewModel.getProducts()
 
+        handleSearch()
+
         setupRecyclerView()
         setLiveDataListener()
+    }
+
+    private fun handleSearch() {
+        binding.searchView.setOnSearchClickListener {
+            Toast.makeText(this, "search", Toast.LENGTH_SHORT).show()
+        }
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                //Toast.makeText(this@ProductActivity, query, Toast.LENGTH_SHORT).show()
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                search(newText)
+                return false
+            }
+        })
+    }
+
+    private fun search(text: String?){
+        // creating a new array list to filter our data.
+        val filteredList: ArrayList<ProductModel.ProductModelItem> = ArrayList()
+
+        // running a for loop to compare elements.
+        for (item in products) {
+            // checking if the entered string matched with any item of our recycler view.
+            if (text != null) {
+                if (item.title.toLowerCase().contains(text.toLowerCase())) {
+                    // if the item is matched we are
+                    // adding it to our filtered list.
+                    filteredList.add(item)
+                }
+            }
+        }
+        if (filteredList.isEmpty()) {
+            // if no item is added in filtered list we are
+            // displaying a toast message as no data found.
+            Toast.makeText(this, "No Data Found..", Toast.LENGTH_SHORT).show()
+        } else {
+            // at last we are passing that filtered
+            // list to our adapter class.
+            //productAdapter.filterList(filteredList)
+            productAdapter.submitList(filteredList)
+            productAdapter.notifyDataSetChanged()
+        }
     }
 
     private fun setupRecyclerView() {

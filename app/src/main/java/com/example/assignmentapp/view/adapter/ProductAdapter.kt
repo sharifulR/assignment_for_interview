@@ -20,6 +20,10 @@ class ProductAdapter(
     )
     : ListAdapter<ProductModel.ProductModelItem, RecyclerView.ViewHolder>(ListItemCallback()){
 
+    fun filterList(filterList: ArrayList<ProductModel.ProductModelItem>){
+
+    }
+
     interface ListItemClickListener {
         fun onItemClick(
             item: ProductModel.ProductModelItem,
