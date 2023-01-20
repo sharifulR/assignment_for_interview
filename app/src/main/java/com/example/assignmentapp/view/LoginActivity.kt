@@ -26,11 +26,10 @@ class LoginActivity : AppCompatActivity() {
         _binding =ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        startActivity(Intent(this, ProductActivity::class.java))
         viewModel.loginResponseLiveData.observe(this, Observer {
             when(it){
                 is NetworkResult.Success ->{
-                    //startActivity(Intent(this, ProductActivity::class.java))
+                    startActivity(Intent(this, ProductActivity::class.java))
                 }
                 is NetworkResult.Error -> {
                     Toast.makeText(this, "Login failed!, please try again.", Toast.LENGTH_SHORT).show()

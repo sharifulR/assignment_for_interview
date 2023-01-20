@@ -5,6 +5,7 @@ import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
@@ -19,10 +20,6 @@ class ProductAdapter(
     private val listItemClickListener: ListItemClickListener
     )
     : ListAdapter<ProductModel.ProductModelItem, RecyclerView.ViewHolder>(ListItemCallback()){
-
-    fun filterList(filterList: ArrayList<ProductModel.ProductModelItem>){
-
-    }
 
     interface ListItemClickListener {
         fun onItemClick(

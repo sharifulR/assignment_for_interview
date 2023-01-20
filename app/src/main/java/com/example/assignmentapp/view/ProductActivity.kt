@@ -1,5 +1,6 @@
 package com.example.assignmentapp.view
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -32,6 +33,10 @@ class ProductActivity : AppCompatActivity(), ProductAdapter.ListItemClickListene
         super.onCreate(savedInstanceState)
         _binding = ActivityProductBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.ivCartIcon.setOnClickListener{
+            startActivity(Intent(this, CartActivity::class.java))
+        }
 
         viewModel.getProducts()
 
